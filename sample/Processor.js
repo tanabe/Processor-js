@@ -43,9 +43,10 @@ var Process = function() {
 
   /**
    *  set result object
+   *  @result result object
    */
-  function setResult() {
-    //TBD
+  function setResult(result) {
+    this.result = result;
   }
 
   /**
@@ -71,6 +72,7 @@ var Process = function() {
   }
 
   var Process = {};
+  Process.result = result;
   Process.execute = execute;
   Process.pause = pause;
   Process.resume = resume;
