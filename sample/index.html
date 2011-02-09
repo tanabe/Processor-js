@@ -33,10 +33,11 @@
       var p1 = new Process();
       p1.execute = function() {
         //do something
+        output("p1 timer start!");
         var self = this;
         self.result.hoge = "result object is pass through";
         this.foo = setInterval(function() {
-          output("p1 timer action!");
+          output("p1 timer done!");
           clearInterval(self.foo);
           self.done();
         }, 2000);
@@ -46,21 +47,23 @@
       var p2 = new Process();
       p2.execute = function() {
         //do something
+        output("p2 timer start!");
         var self = this;
         this.foo = setInterval(function() {
-          output("p2 timer action!");
+          output("p2 timer done!");
           clearInterval(self.foo);
           self.done();
-        }, 1000);
+        }, 5000);
       };
 
       //create process 3
       var p3 = new Process();
       p3.execute = function() {
         //do something
+        output("p3 timer start!");
         var self = this;
         this.foo = setInterval(function() {
-          output("p3 timer action!");
+          output("p3 timer done!");
           clearInterval(self.foo);
           self.done();
         }, 2000);
@@ -69,7 +72,7 @@
       var processor = new Processor();
       processor.addCallback(null, function() {
         output(processor.result.hoge);
-        output("all done");
+        output("all done!");
       });
       //queueing
       //p1 --> p2
