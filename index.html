@@ -1,1 +1,105 @@
-My GitHub Page
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="content-language" content="ja">
+
+    <title></title>
+
+    <meta http-equiv="content-script-type" content="text/javascript">
+    <meta http-equiv="content-style-type" content="text/css">
+
+    <style type="text/css">
+      body {
+        font-size: 1.2em;
+      }
+      #output {
+        background-color: #ccc;
+      }
+
+      #source {
+        color: white;
+        background-color: black;
+      }
+    </style>
+    <script type="text/javascript" src="Processor.js"></script>
+    <script type="text/javascript">
+      function output(message) {
+        document.getElementById("output").innerHTML += message + "<br>";
+      }
+
+      //create process 1
+      var p1 = new Process();
+      p1.execute = function() {
+        //do something
+        output("p1 timer start!");
+        var self = this;
+        self.result.hoge = "result object is pass through";
+        this.foo = setInterval(function() {
+          output("p1 timer done!");
+          clearInterval(self.foo);
+          self.done();
+        }, 2000);
+      };
+
+      //create process 2
+      var p2 = new Process();
+      p2.execute = function() {
+        //do something
+        output("p2 timer start!");
+        var self = this;
+        this.foo = setInterval(function() {
+          output("p2 timer done!");
+          clearInterval(self.foo);
+          self.done();
+        }, 5000);
+      };
+
+      //create process 3
+      var p3 = new Process();
+      p3.execute = function() {
+        //do something
+        output("p3 timer start!");
+        var self = this;
+        this.foo = setInterval(function() {
+          output("p3 timer done!");
+          clearInterval(self.foo);
+          self.done();
+        }, 2000);
+      };
+
+      var processor = new Processor();
+      processor.addCallback(null, function() {
+        output(processor.result.hoge);
+        output("all done!");
+      });
+      //queueing
+      //p1 --> p2
+      //   |-> p3
+      processor.add(p1).add(p2, p3);
+
+      //main
+      window.onload = function() {
+        document.getElementById("runButton").onclick = function() {
+          processor.execute();
+        };
+      };
+    </script>
+
+  </head>
+  <body>
+    <h1>Processor.js sample</h1>
+    <button id="runButton">run</button>
+    <h2>output</h2>
+    <div id="output"></div>
+    <h2>code</h2>
+    <pre id="source"></pre>
+    <script type="text/javascript">
+      var source = document.getElementsByTagName("script")[1].innerHTML;
+      source = source.replace(/</g, "&lt;");
+      source = source.replace(/>/g, "&gt;");
+      document.getElementById("source").innerHTML = source;
+    </script>
+  </body>
+</html>
