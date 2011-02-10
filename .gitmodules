@@ -1,0 +1,3 @@
+[submodule "docs"]
+	path = docs
+	url = https://tanabe@github.com/tanabe/Processor-js.git
