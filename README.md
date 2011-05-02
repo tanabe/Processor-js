@@ -1,5 +1,5 @@
 #Processor Library
 ---
 ##usage
-hogehoge
+see http://blog.kaihatsubu.com/?p=1822
 
