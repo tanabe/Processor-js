@@ -171,4 +171,4 @@ var Processor = function() {
   Processor.processCompleteHandler = processCompleteHandler;
   Processor.pauseProcesses = pauseProcesses;
   return Processor;
-}
+};
